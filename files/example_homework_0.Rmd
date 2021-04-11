@@ -22,17 +22,17 @@ rmarkdown::render(rmd_path,output_format="html_document")
 
 2. [World Happiness Report 2021](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021)
 
-    World Happiness Report 2021
+    The World Happiness Report is a landmark survey of the state of global happiness . The report continues to gain global recognition as governments, organizations and civil society increasingly use happiness indicators to inform their policy-making decisions. Leading experts across fields – economics, psychology, survey analysis, national statistics, health, public policy and more – describe how measurements of well-being can be used effectively to assess the progress of nations. The reports review the state of happiness in the world today and show how the new science of happiness explains personal and national variations in happiness.
 
 3. [TFT match data](https://www.kaggle.com/gyejr95/tft-match-data)
 
-    TFT match data
+    This data set is the High elo Ranked Games data for a TFT game called TeamFights Tactics.It is a game in which 8 participants fight against each other by forming various combinations suitable for their strategy, and it is composed of individual exhibitions.The data was collected only from High elo Ranked Games, and we built three ranking games, Rolltoches' Top Rank Challenger, Grandmaster, and Master.A similar game is Auto Chess, which combines approximately 50 champions to create their own combination.There are 10 series synergies and 13 job synergies, and you can create various combinations.The final level is 9 levels, and there is a limit to what you can put on the board for each level. You can raise 1 champion per level, and when you reach the final 9 level, you can raise 9 champions on the board. (May vary slightly depending on champion skill and combination characteristics)
 
 4. [Google Play Store Apps](https://www.kaggle.com/lava18/google-play-store-apps)
 
-    Google Play Store Apps
+    While many public datasets (on Kaggle and the like) provide Apple App Store data, there are not many counterpart datasets available for Google Play Store apps anywhere on the web. On digging deeper, I found out that iTunes App Store page deploys a nicely indexed appendix-like structure to allow for simple and easy web scraping. On the other hand, Google Play Store uses sophisticated modern-day techniques (like dynamic page load) using JQuery making scraping more challenging.
 
 5. [Covid19 tweets](https://www.kaggle.com/gpreda/covid19-tweets)
 
-    Covid19 tweets
+    These tweets are collected using Twitter API and a Python script. A query for this high-frequency hashtag (#covid19) is run on a daily basis for a certain time period, to collect a larger number of tweets samples.
 
