@@ -1,0 +1,38 @@
+---
+title: "Interesting R Examples"
+author: "Sarper Karabag - ETM58D - Spring21"
+output:
+  html_document:
+    df_print: paged
+---
+```{r,echo=FALSE,results="hide"}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
+```
+
+```{r,echo=FALSE,eval=FALSE}
+rmd_path='/mnt/11a4ca17-594d-4aab-b29d-9e8c3dcbbce8/Courses/ETM58D/Spring21/Guidelines/example_homework_0.Rmd'
+rmarkdown::render(rmd_path,output_format="pdf_document")
+rmarkdown::render(rmd_path,output_format="html_document")
+```
+
+1. [Exploring Survival on the Titanic](https://www.kaggle.com/mrisdal/exploring-survival-on-the-titanic)
+
+    This example is important because it is an R Notebook on Titanic data set. Titanic is considered as one of the Data Science 101 data set and this notebook provides a good exploratory data analysis. It is also a Kaggle Kernel, which is a very good source for this kind of example R codes. The notebook also covers feature engineering, missing data imputation and modeling.
+
+2. [World Happiness Report 2021](https://www.kaggle.com/ajaypalsinghlo/world-happiness-report-2021)
+
+    World Happiness Report 2021
+
+3. [TFT match data](https://www.kaggle.com/gyejr95/tft-match-data)
+
+    TFT match data
+
+4. [Google Play Store Apps](https://www.kaggle.com/lava18/google-play-store-apps)
+
+    Google Play Store Apps
+
+5. [Covid19 tweets](https://www.kaggle.com/gpreda/covid19-tweets)
+
+    Covid19 tweets
+
