@@ -1,5 +1,9 @@
 ## Example Progress Journal
 
+##HW1
+
+[Here](files/hw.html) is the HW1
+
 
 ## Week 0
 
