@@ -1,0 +1,155 @@
+---
+title: "HW1"
+author: "Sarper Karabağ"
+output: html_document
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1 - EVDS Data Graph
+
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(zoo)
+
+
+d <- read.csv("EVDS2.csv")
+
+#glimpse(d)
+
+#(TP.DK.USD.A.YTL, TP.KTF10, Tarih, TP.HKFE01) 
+
+d$Tarih <- as.yearmon(d$Tarih)
+
+#glimpse(d)
+
+ggplot(d, aes(x=Tarih)) + 
+  geom_line(aes(y=TP.DK.USD.A.YTL, col="US Dollar")) + 
+  geom_line(aes(y=TP.KTF10, col="Weighted Average Interest Rates For Banks Loans - Personal")) + 
+  geom_line(aes(y=TP.HKFE01, col="Residential Property Price Index (RPPI)")) +
+  labs(y=NULL) +
+  theme_bw() +
+  theme(legend.position="top" , legend.background = element_rect(fill="gray", linetype="solid"))
+
+
+```
+
+## Questions about the graph
+
+### 1) Is there an increasing/decreasing trend?
+
+In the last quarter of 2018, we can see that there is an one increasing as the others increase trend. Another observation from the graph that in late 2019 there is a 
+decreasing trend on Weighted Average Interest Rates for Bank Loans while Residential 
+Price Index.
+
+### 2) Is there a quarterly or monthly similarity over the years?
+
+In the last quarter of 2018 and first quarter of the2019
+
+In late quarter of 2018 and in the late quarter of 2020.
+
+### 3) Are there any abnormal observations?
+
+In the late quarter of 2019 to early stages of 2020, we can observe an abnormality as normally 3 data behave similarly. 
+
+### 4) What may be the reason of the behavior you observed?
+
+One reason might be the increase in the rent rates in the 2019 as %18,27.
+
+# Part2 - Google Trend Data Visualization
+
+## Key word: Konut Kredisi
+
+### US Dollar - Konut Kredisi
+
+
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(zoo)
+
+d <- read.csv("EVDS2.csv")
+
+
+d$Tarih <- as.yearmon(d$Tarih)
+
+konutkredisi <- read.csv("konutkredisi.csv")
+
+konutkredisi$Tarih <- as.yearmon(konutkredisi$Tarih)
+
+df <- left_join(d, konutkredisi, by = "Tarih")
+
+ggplot(df, aes(x=Tarih)) + 
+    geom_line(aes(y=konutkredisi, col="Konut Kredisi")) +
+    geom_line(aes(y=TP.DK.USD.A.YTL, col="US Dollar"))+ 
+    labs(y=NULL) +
+    theme_bw() +
+    theme(legend.position="top" , legend.background = element_rect(fill="gray", linetype="solid"))
+    
+    
+```
+
+ We can say that there is an increasing trend. When dollar price increases, mortgage increases. It can be observed after the first quarter of 2018.
+
+
+### Weighted Average Interest Rates For Banks Loans(Personal) - Konut Kredisi
+
+
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(zoo)
+
+d <- read.csv("EVDS2.csv")
+
+
+d$Tarih <- as.yearmon(d$Tarih)
+
+konutkredisi <- read.csv("konutkredisi.csv")
+
+konutkredisi$Tarih <- as.yearmon(konutkredisi$Tarih)
+
+df <- left_join(d, konutkredisi, by = "Tarih")
+ggplot(df, aes(x=Tarih)) + 
+    geom_line(aes(y=konutkredisi, col="Konut Kredisi")) +
+    geom_line(aes(y=TP.KTF10, col="Weighted Average Interest Rates For Banks Loans - Personal")) +
+    labs(y=NULL) +
+    theme_bw() +
+    theme(legend.position="top" , legend.background = element_rect(fill="gray", linetype="solid"))
+
+```
+
+We can say that there is no certain trend but components are tend to behave opposite.
+
+### Residential Property Price Index (RPPI) - Konut Kredisi
+
+    
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(zoo)
+
+d <- read.csv("EVDS2.csv")
+
+
+d$Tarih <- as.yearmon(d$Tarih)
+
+konutkredisi <- read.csv("konutkredisi.csv")
+
+konutkredisi$Tarih <- as.yearmon(konutkredisi$Tarih)
+    
+ggplot(df, aes(x=Tarih)) + 
+    geom_line(aes(y=konutkredisi, col="Konut Kredisi")) +
+    geom_line(aes(y=TP.HKFE01, col="Residential Property Price Index (RPPI)")) +
+    labs(y=NULL) +
+    theme_bw() +
+    theme(legend.position="top" , legend.background = element_rect(fill="gray", linetype="solid"))
+    
+```
+
+We can say that sudden increase in the mortgage, decreases the Residential Property Price Index. Hence, they behave opposite to the sudden changes.
