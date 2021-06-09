@@ -1,0 +1,251 @@
+---
+title: "HW2"
+author: "Sarper Karabağ"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Q1
+
+When we use distance information of Turkey's cities to create 2D plot with MDS,
+we can observe that the plot looks like Turkey Map on the plot.
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(philentropy)
+library(scatterplot3d)
+library(factoextra)
+library(ggfortify)
+library(tibble)
+
+x <- read.csv("HW2_q1_data.csv")
+
+x[is.na(x)] = 0
+
+y.location <- cmdscale(x, k=2)    
+y.location <- round(y.location,0)        
+plot(y.location,type="n", xlab="", ylab="",main ="Turkey map according to city distances")
+text(y.location,labels=names(x))
+
+
+```
+
+
+
+
+
+# Q2
+
+In this question, we used Netflix data from 10000 users to create a plot, using MDS
+with Manhattan method. When we look at the plot, we can observe that the movies
+that are related or sequence are closer points to each other.
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+
+netflix <- read.table("HW2_q3_Netflix_data.dat")
+movieNames <- read.table("HW2_q3_movie_titles.csv")
+
+#glimpse(movieNames)
+
+movieNames <- t(movieNames)
+movieNames <- as.data.frame(movieNames)
+
+#glimpse(netflix)
+
+netflix <- t(netflix)
+netflix <- as.data.frame(netflix)
+
+
+
+#glimpse(netflix)
+
+netflix <- distance(netflix, method = "manhattan", use.row.names = FALSE)
+
+net <- cmdscale(netflix, eig = TRUE, k = 2)
+x <- net$points[, 1]
+y <- net$points[, 2]
+
+plot(x, y, pch = 19)
+text(x, y, pos = 3, labels = movieNames)
+
+
+```
+
+# Q3.a
+
+In part 3, we used the data from Liu et al., which contains gesture data divided
+into 3 seperate files. The files are divided according to the axis information
+of the movement which are X,Y and Z axes. There are 8 classes in the data which 
+shows that there 8 different people who performed gestures and we visualized every gesture movement
+in part a.
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+
+x <- read.table("uWaveGestureLibrary_X_TRAIN")
+y <- read.table("uWaveGestureLibrary_Y_TRAIN")
+z <- read.table("uWaveGestureLibrary_Z_TRAIN")
+
+
+x <- t(x)
+y <- t(y)
+z <- t(z)
+
+
+#Class 1
+scatterplot3d(x[,11], y[,11], z[,11], main="Class 1", color = 1)
+
+#Class 2
+scatterplot3d(x[,20], y[,20], z[,20], main="Class 2", color = 2)
+
+#Class 3
+scatterplot3d(x[,4], y[,4], z[,4], main="Class 3", color = 3)
+
+#Class 4
+scatterplot3d(x[,5], y[,5], z[,5], main="Class 4", color = 4)
+
+#Class 5
+scatterplot3d(x[,2], y[,2], z[,2], main="Class 5", color = 5)
+
+#Class 6
+scatterplot3d(x[,1], y[,1], z[,1], main="Class 6", color = 6)
+
+#Class 7
+scatterplot3d(x[,7], y[,7], z[,7], main="Class 7", color = 7)
+
+#Class 8
+scatterplot3d(x[,6], y[,6], z[,6], main="Class 8", color = 8)
+```
+
+# Q3.b
+
+In part b, we concatenate the time series of X,Y and Z axis column wise. Which can be
+interpreted as a row contains class(person) id, X , Y and Z data. An example tribble:
+
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+
+x <- read.table("uWaveGestureLibrary_X_TRAIN")
+y <- read.table("uWaveGestureLibrary_Y_TRAIN")
+z <- read.table("uWaveGestureLibrary_Z_TRAIN")
+
+x <- t(x)
+y <- t(y)
+z <- t(z)
+
+#Class 1
+bind1 <- cbind(x[,11], y[,11], z[,11])
+bind2 <- cbind(x[,20], y[,20], z[,20])
+bind3 <- cbind(x[,4], y[,4], z[,4])
+bind4 <- cbind(x[,5], y[,5], z[,5])
+bind5 <- cbind(x[,2], y[,2], z[,2])
+bind6 <- cbind(x[,1], y[,11], z[,11])
+bind7 <- cbind(x[,7], y[,7], z[,7])
+bind8 <- cbind(x[,6], y[,6], z[,6])
+
+
+id <- rownames(bind1)
+id <- rownames(bind2)
+id <- rownames(bind3)
+id <- rownames(bind4)
+id <- rownames(bind5)
+id <- rownames(bind6)
+id <- rownames(bind7)
+id <- rownames(bind8)
+
+c1 <- cbind(id=1, bind1)
+c2 <- cbind(id=2, bind2)
+c3 <- cbind(id=3, bind3)
+c4 <- cbind(id=4, bind4)
+c5 <- cbind(id=5, bind5)
+c6 <- cbind(id=6, bind6)
+c7 <- cbind(id=7, bind7)
+c8 <- cbind(id=8, bind8)
+
+c1 <- (c1[-1,])
+c2 <- (c2[-1,])
+c3 <- (c3[-1,])
+c4 <- (c4[-1,])
+c5 <- (c5[-1,])
+c6 <- (c6[-1,])
+c7 <- (c7[-1,])
+c8 <- (c8[-1,])
+
+
+final <- rbind(c1,c2,c3,c4,c5,c6,c7,c8)
+colnames(final) <- c("id","X","Y","Z")
+rownames(final)<-c(1:nrow(final))
+
+as_tibble(final)
+```
+
+Then, we question if the classification task is reasonable to reduce the data into 2D with PCA. For this purpose,
+we applied PCA to the concatenated data and visualized it in 2D plot with different
+colors
+
+```{r , echo=FALSE,warning=FALSE,message=FALSE}
+
+x <- read.table("uWaveGestureLibrary_X_TRAIN")
+y <- read.table("uWaveGestureLibrary_Y_TRAIN")
+z <- read.table("uWaveGestureLibrary_Z_TRAIN")
+
+x <- t(x)
+y <- t(y)
+z <- t(z)
+
+#Class 1
+bind1 <- cbind(x[,11], y[,11], z[,11])
+bind2 <- cbind(x[,20], y[,20], z[,20])
+bind3 <- cbind(x[,4], y[,4], z[,4])
+bind4 <- cbind(x[,5], y[,5], z[,5])
+bind5 <- cbind(x[,2], y[,2], z[,2])
+bind6 <- cbind(x[,1], y[,11], z[,11])
+bind7 <- cbind(x[,7], y[,7], z[,7])
+bind8 <- cbind(x[,6], y[,6], z[,6])
+
+
+id <- rownames(bind1)
+id <- rownames(bind2)
+id <- rownames(bind3)
+id <- rownames(bind4)
+id <- rownames(bind5)
+id <- rownames(bind6)
+id <- rownames(bind7)
+id <- rownames(bind8)
+
+c1 <- cbind(id=1, bind1)
+c2 <- cbind(id=2, bind2)
+c3 <- cbind(id=3, bind3)
+c4 <- cbind(id=4, bind4)
+c5 <- cbind(id=5, bind5)
+c6 <- cbind(id=6, bind6)
+c7 <- cbind(id=7, bind7)
+c8 <- cbind(id=8, bind8)
+
+c1 <- (c1[-1,])
+c2 <- (c2[-1,])
+c3 <- (c3[-1,])
+c4 <- (c4[-1,])
+c5 <- (c5[-1,])
+c6 <- (c6[-1,])
+c7 <- (c7[-1,])
+c8 <- (c8[-1,])
+
+
+final <- rbind(c1,c2,c3,c4,c5,c6,c7,c8)
+colnames(final) <- c("id","X","Y","Z")
+rownames(final)<-c(1:nrow(final))
+
+pca_final <- final[,-1]
+
+res.pca <- prcomp(pca_final, scale = TRUE)
+
+autoplot(res.pca, data = final, colour = "id")
+```
+
+The plot shows that some gestures are close to each other as colors differ in every
+person's gesture. Especially on the left-middle side of the plot, we can say that almost
+every gesture has a point on that area. 
+
+
+
+
