@@ -2,7 +2,7 @@
 
 ## HW2
 
-[Here](files/HW2.html) is the HW2
+[Here](files/HW2_1.html) is the HW2
 
 ## HW1
 
