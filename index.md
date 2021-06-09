@@ -1,5 +1,9 @@
 ## Example Progress Journal
 
+## HW2
+
+[Here](files/HW2.html) is the HW2
+
 ## HW1
 
 [Here](files/hw.html) is the HW1
