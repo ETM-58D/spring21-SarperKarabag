@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 When we use distance information of Turkey's cities to create 2D plot with MDS,
 we can observe that the plot looks like Turkey Map on the plot.
-```{r , echo=FALSE,warning=FALSE,message=FALSE}
+```{r , echo=FALSE,warning=FALSE,message=FALSE, dpi = 200, fig.width = 10, fig.height=6}
 library(tidyverse)
 library(lubridate)
 library(philentropy)
@@ -42,7 +42,7 @@ text(y.location,labels=names(x))
 In this question, we used Netflix data from 10000 users to create a plot, using MDS
 with Manhattan method. When we look at the plot, we can observe that the movies
 that are related or sequence are closer points to each other.
-```{r , echo=FALSE,warning=FALSE,message=FALSE}
+```{r , echo=FALSE,warning=FALSE,message=FALSE, dpi = 200, fig.width = 10, fig.height=10}
 
 netflix <- read.table("HW2_q3_Netflix_data.dat")
 movieNames <- read.table("HW2_q3_movie_titles.csv")
@@ -80,7 +80,7 @@ into 3 seperate files. The files are divided according to the axis information
 of the movement which are X,Y and Z axes. There are 8 classes in the data which 
 shows that there 8 different people who performed gestures and we visualized every gesture movement
 in part a.
-```{r , echo=FALSE,warning=FALSE,message=FALSE}
+```{r , echo=FALSE,warning=FALSE,message=FALSE, dpi = 200}
 
 x <- read.table("uWaveGestureLibrary_X_TRAIN")
 y <- read.table("uWaveGestureLibrary_Y_TRAIN")
@@ -122,7 +122,7 @@ scatterplot3d(x[,6], y[,6], z[,6], main="Class 8", color = 8)
 In part b, we concatenate the time series of X,Y and Z axis column wise. Which can be
 interpreted as a row contains class(person) id, X , Y and Z data. An example tribble:
 
-```{r , echo=FALSE,warning=FALSE,message=FALSE}
+```{r , echo=FALSE,warning=FALSE,message=FALSE, dpi = 200}
 
 x <- read.table("uWaveGestureLibrary_X_TRAIN")
 y <- read.table("uWaveGestureLibrary_Y_TRAIN")
@@ -182,7 +182,7 @@ Then, we question if the classification task is reasonable to reduce the data in
 we applied PCA to the concatenated data and visualized it in 2D plot with different
 colors
 
-```{r , echo=FALSE,warning=FALSE,message=FALSE}
+```{r , echo=FALSE,warning=FALSE,message=FALSE, dpi = 200}
 
 x <- read.table("uWaveGestureLibrary_X_TRAIN")
 y <- read.table("uWaveGestureLibrary_Y_TRAIN")
