@@ -1,5 +1,10 @@
 ## Example Progress Journal
 
+
+## Project
+
+[Here](files/ETM58D_Project.html) is the Project
+
 ## HW2
 
 [Here](files/HW2_1.html) is the HW2
